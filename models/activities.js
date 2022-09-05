@@ -3,6 +3,15 @@ const Work = require("./work");
 class Activities {
     _list = {};
 
+    get listArr() {
+        const list = [];
+        Object.keys(this._list).forEach(key => {
+            const tarea = this._list[key];
+            list.push(tarea);
+        });
+        return list;
+    }
+
     constructor() {
         this._list = {};
     }
