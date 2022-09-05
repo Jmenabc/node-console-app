@@ -55,12 +55,11 @@ const inquirerMenu = async () => {
     console.log('Seleccione una opción'.green);
     console.log('=====================\n'.green);
 
-    const {opcion} = await inquirer.prompt(menuOpts);
+    const { opcion } = await inquirer.prompt(menuOpts);
     return opcion;
 }
 
-const pause = async() => {
-    
+const pause = async () => {
     const question = [
         {
             type: 'input',
@@ -72,10 +71,27 @@ const pause = async() => {
 
 }
 
+const readInput = async (message) => {
+    const question = {
+        type: 'input',
+        name: 'description',
+        message,
+        validate(value) {
+            if (value.length === 0) {
+                return `${'Por favor ingrese un valor'.red}`
+            }
+            return true;
+        }
+    }
+    const {description} = await inquirer.prompt(question);
+    return description;
+}
+
 
 module.exports = {
     inquirerMenu,
-    pause
+    pause,
+    readInput
 }
 
 
