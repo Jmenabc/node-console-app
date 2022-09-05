@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Jmenabc/node-console-app#readme",
   "dependencies": {
-    "colors": "^1.4.0"
+    "colors": "^1.4.0",
+    "inquirer": "^8.0.0"
   }
 }
