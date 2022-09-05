@@ -1,7 +1,7 @@
 require('colors');
 const {inquirerMenu, pause} = require('./helpers/inquirer');
+const Work = require('./models/work');
 
-console.clear();
 const main = async () => {
 
     let opt = '';
@@ -9,10 +9,13 @@ const main = async () => {
 
 
     do {
-        opt = await inquirerMenu();
+         opt = await inquirerMenu();
 
-        await pause();
+         await pause();
 
+        // const work = new Work('Comprar comida');
+
+        // console.log(work);
     } while (opt !== '0');
 
 }
