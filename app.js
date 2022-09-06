@@ -34,6 +34,14 @@ const main = async () => {
                 //Listamos la opción/es
                 activitie.completeList();
                 break;
+            case '3':
+                //Listamos la opción/es completadas
+                activitie.listActivitiesCompletes(true);
+                break;
+            case '4':
+                //Listamos la opción/es no completadas
+                activitie.listActivitiesCompletes(false);
+                break;
         }
 
 

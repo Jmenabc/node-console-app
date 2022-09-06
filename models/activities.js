@@ -45,6 +45,32 @@ class Activities {
             console.log(`${idx} ${description} :-- ${status}`);
         });
     }
+
+    listActivitiesCompletes(complete = true) {
+        let i = 0;
+        this.listArr.forEach((tarea, i) => {
+            const idx = `${i + 1}.-`.blue;
+            const { description, finish } = tarea;
+            const status = (finish)
+                ? 'Completada'.green
+                : 'Pendiente'.red
+
+            if (complete) {
+                if (finish) {
+                    i += 1;
+                    console.log(`${i.toString().blue} :--: ${description}`.green);
+                }
+                else {
+                    if (!finish) {
+                        i += 1;
+                        console.log(`${i.toString().blue} :--: ${description}`.red);
+                    }
+                }
+            }
+
+        });
+    }
+
 }
 
 module.exports = Activities;
