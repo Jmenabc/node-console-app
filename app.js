@@ -32,7 +32,7 @@ const main = async () => {
 
             case '2':
                 //Listamos la opción/es
-                console.log(activitie._list);
+                activitie.completeList();
                 break;
         }
 
