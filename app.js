@@ -1,62 +1,76 @@
 require('colors');
-const {
-    inquirerMenu,
-    pause,
-    readInput } = require('./helpers/inquirer');
-const { saveDB, readDb } = require('./helpers/saveData');
-const Activities = require('./models/activities');
-const Work = require('./models/work');
 
-const main = async () => {
+const { guardarDB, leerDB } = require('./helpers/guardarArchivo');
+const { inquirerMenu, 
+        pausa,
+        leerInput,
+        listadoTareasBorrar,
+        confirmar,
+        mostrarListadoChecklist
+} = require('./helpers/inquirer');
+
+const Tareas = require('./models/tareas');
+
+
+const main = async() => {
 
     let opt = '';
-    const activitie = new Activities();
+    const tareas = new Tareas();
 
-    const activitiesDB = readDb();
+    const tareasDB = leerDB();
 
-    if (activitiesDB) {
-        //Establecer las tareas
-        activitie.chargeActivitiesFromArrays(activitiesDB);
+    if ( tareasDB ) { // cargar tareas
+        tareas.cargarTareasFromArray( tareasDB );
     }
 
-
     do {
+        // Imprimir el menú
         opt = await inquirerMenu();
 
         switch (opt) {
             case '1':
-                //Creamos la opcion
-                const description = await readInput('Descripcion');
-                activitie.createActivitie(description);
-                break;
+                // crear opcion
+                const desc = await leerInput('Descripción:');
+                tareas.crearTarea( desc );
+            break;
 
             case '2':
-                //Listamos la opción/es
-                activitie.completeList();
-                break;
-            case '3':
-                //Listamos la opción/es completadas
-                activitie.listActivitiesCompletes(true);
-                break;
-            case '4':
-                //Listamos la opción/es no completadas
-                activitie.listActivitiesCompletes(false);
-                break;
+                tareas.listadoCompleto();
+            break;
+            
+            case '3': // listar completadas
+                tareas.listarPendientesCompletadas(true);
+            break;
+
+            case '4': // listar pendientes
+                tareas.listarPendientesCompletadas(false);
+            break;
+                       
+            case '6': // Borrar
+                const id = await listadoTareasBorrar( tareas.listadoArr );
+                if ( id !== '0' ) {
+                    const ok =  confirmar('¿Está seguro?');
+                    if ( ok ) {
+                        tareas.borrarTarea( id );
+                        console.log('Tarea borrada');
+                    }
+                }
+            break;
+        
         }
 
 
-        saveDB(activitie.listArr);
+        guardarDB( tareas.listadoArr );
+
+        await pausa();
+
+    } while( opt !== '0' );
 
 
-        await pause();
-
-        // const work = new Work('Comprar comida');
-
-        // console.log(work);
-    } while (opt !== '0');
+    // pausa();
 
 }
 
 
-
 main();
+
