@@ -16,6 +16,13 @@ class Activities {
         this._list = {};
     }
 
+    chargeActivitiesFromArrays(activities = []) {
+        activities.forEach(tarea => {
+            this._list[tarea.id] = tarea;
+        })
+
+    }
+
     createActivitie(description = '') {
         const activitie = new Work(description);
 
@@ -23,4 +30,4 @@ class Activities {
     }
 }
 
-module.exports = Activities;
+module.exports = { Activities };
