@@ -19,7 +19,7 @@ class Activities {
     chargeActivitiesFromArrays(activities = []) {
         activities.forEach(tarea => {
             this._list[tarea.id] = tarea;
-        })
+        });
 
     }
 
@@ -30,4 +30,4 @@ class Activities {
     }
 }
 
-module.exports = { Activities };
+module.exports =  Activities ;

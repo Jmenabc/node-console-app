@@ -4,7 +4,7 @@ const {
     pause,
     readInput } = require('./helpers/inquirer');
 const { saveDB, readDb } = require('./helpers/saveData');
-const {Activities} = require('./models/activities');
+const Activities = require('./models/activities');
 const Work = require('./models/work');
 
 const main = async () => {
@@ -37,7 +37,7 @@ const main = async () => {
         }
 
 
-         saveDB(activitie.listArr);
+        saveDB(activitie.listArr);
 
 
         await pause();
