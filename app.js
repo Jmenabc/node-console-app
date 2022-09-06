@@ -3,6 +3,7 @@ const {
     inquirerMenu,
     pause,
     readInput } = require('./helpers/inquirer');
+const { saveDB, readDb } = require('./helpers/saveData');
 const Activities = require('./models/activities');
 const Work = require('./models/work');
 
@@ -11,6 +12,13 @@ const main = async () => {
     let opt = '';
     const activitie = new Activities();
 
+    const activitiesDB = readDb();
+
+    if (activitiesDB) {
+        //Establecer las tareas
+    }
+
+    await pause();
 
     do {
         opt = await inquirerMenu();
@@ -27,6 +35,10 @@ const main = async () => {
                 console.log(activitie._list);
                 break;
         }
+
+
+         saveDB(activitie.listArr);
+
 
         await pause();
 
