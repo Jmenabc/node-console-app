@@ -96,23 +96,19 @@ class Tareas {
 
     toggleCompletadas( ids = [] ) {
 
-        ids.forEach( id => {
-
+        ids.forEach(id => {
             const tarea = this._listado[id];
-            if ( !tarea.completadoEn ) {
-                tarea.completadoEn = new Date().toISOString()
+            if (!tarea.completadoEn) {
+                tarea.completadoEn = new Date().toISOString();
             }
-
         });
 
-        this.listadoArr.forEach( tarea => {
-
-            if ( !ids.includes(tarea.id) ) {
-                this._listado[tarea.id].completadoEn = null;
+        this.listadoArr.forEach(tarea => {
+            if (!ids.includes(tarea.id)) {
+                const tarea = this._listado[id];
+                tarea.completadoEn = null;
             }
-
         });
-
 
     }
 
